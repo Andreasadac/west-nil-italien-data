@@ -1,0 +1,3 @@
+/data/kommunen-struktur.csv         # Die zentrale CSV-Datei mit den Kommunen-Daten
+/scripts/fetch_kommunen.py          # Das Python-Skript zur Pflege/Aktualisierung der Daten
+/.github/workflows/update-kommune.yml # Der Workflow zur Automatisierung

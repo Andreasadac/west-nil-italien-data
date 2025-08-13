@@ -1,0 +1,29 @@
+name: Update Kommunen CSV
+
+on:
+  schedule:
+    - cron: '0 6 * * *' # Täglich um 6:00 UTC
+  workflow_dispatch:
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Update Kommunen CSV
+        run: python scripts/fetch_kommunen.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git add data/kommunen-struktur.csv
+          git commit -m "Automatisches Update Kommunen CSV $(date +'%Y-%m-%d')"
+          git push
